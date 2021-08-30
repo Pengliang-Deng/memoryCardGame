@@ -12,7 +12,7 @@ import react_img from './icons/react.svg';
 import sass_img from './icons/sass.svg';
 
 
-const uniqueCardsArray = [
+export const uniqueCardsArray = [
     {
         type:'aws',
         img: aws_img
@@ -59,4 +59,12 @@ const uniqueCardsArray = [
     }
 ]
 
-export default uniqueCardsArray;
+export const initGameData = [
+    {
+        score: 0,
+        level: 1,
+        timer: 60
+    }
+]
+
+// export default uniqueCardsArray, initGameData};

@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef} from 'react';
 import Card from '../Card';
 import './Board.css';
 import '../Card';
-import uniqueCardsArray from '../../data'
+import {uniqueCardsArray} from '../../data'
 
-function Board() {
+function Board(props) {
 
     const Cards = [
         {
@@ -70,18 +70,31 @@ function Board() {
     },[openCards])
 
     return (
-        <div className="game-board" style={{"gridTemplateColumns" : "1fr 1fr"}}>
-
-            {Cards.map((card) => {
-                return <Card 
-                        img={card.img} 
-                        handleCardClick={handleCardClick} 
-                        id={card.id} key={card.id} 
-                        isFlipped={checkIsFlipped(card.id)}
-                        isMatched={checkIsMatched(card.id)}
-                        isClickable={isClickable}
-                    />})}
-
+        <div>
+            <div className={`game-board ${props.isStart? '':'hidden'}`} style={{"gridTemplateColumns" : "1fr 1fr"}}>
+                
+                {Cards.map((card) => {return <Card 
+                            img={card.img} 
+                            handleCardClick={handleCardClick} 
+                            id={card.id} key={card.id} 
+                            isFlipped={checkIsFlipped(card.id)}
+                            isMatched={checkIsMatched(card.id)}
+                            isClickable={isClickable}/>
+                })}
+            </div>
+                
+            <div className={`game-board ${props.isStart? 'hidden':''}`}>
+                <div className="game-instruction">
+                  <h3 className="game-instruction__header">Instruction</h3>
+                  <p className="game-instruction__content">
+                    - Click on the card to view the back face of the card. <br />
+                    - Get two exact same card to score.<br />- Score are based on the time
+                    and level. <br />- You only have 60s for each level. <br />- There are
+                    three levels, '2x2', '4x4' and '6x6'. <br />- Press 'Start Game'
+                    button when you are ready.
+                  </p>
+                </div>
+              </div>
         </div>
     )
 }

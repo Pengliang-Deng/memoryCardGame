@@ -1,7 +1,15 @@
+import { useEffect, useState } from 'react';
 import './App.css';
 import Board from './components/Board/';
+import Timer from './components/Timer/';
 
 function App() {
+
+  const [isStart, setIsStart] = useState(false);
+
+  const startGame = () => {
+    setIsStart(true);
+  }
 
   return (
     <div className="App">
@@ -17,28 +25,11 @@ function App() {
             <div className="game-stats__score--label">Score:</div>
             <div className="game-stats__score--value">0</div>
           </div>
-          <button className="game-stats__button" type="button">New Game</button>
+          <button onClick={() => startGame()} className="game-stats__button" type="button">New Game</button>
         </div>
 
-        <div className="game-timer"><div className="game-timer__bar">60s</div></div>
-
-        {/* <div class="game-board">
-          <div class="game-instruction">
-            <h3 class="game-instruction__header">Instruction</h3>
-            <p class="game-instruction__content">
-              - Click on the card to view the back face of the card. <br />
-              - Get two exact same card to score.<br />- Score are based on the time
-              and level. <br />- You only have 60s for each level. <br />- There are
-              three levels, '2x2', '4x4' and '6x6'. <br />- Press 'Start Game'
-              button when you are ready.
-            </p>
-          </div>
-        </div> */}
-
-        <Board />
-        {/*  <div class="game-board" style={{"grid-template-columns" : "1fr 1fr"}}> */}
-
-        {/* </div> */}
+        <Timer isStart={isStart}/>
+        <Board isStart={isStart}/>
 
     </div>
   );
