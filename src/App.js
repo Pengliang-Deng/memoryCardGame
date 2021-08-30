@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+
+import './css/App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+  <body>
+    <h1 class="game-title">The Classic MeMmmm Game</h1>
+    <div class="game-stats">
+      <div class="game-stats__level">
+        <div class="game-stats__level--label">Current Level:</div>
+        <div class="game-stats__level--value">1</div>
+      </div>
+      <div class="game-stats__score">
+        <div class="game-stats__score--label">Score:</div>
+        <div class="game-stats__score--value">0</div>
+      </div>
+      <button class="game-stats__button" type="button">New Game</button>
+    </div>
+    <div class="game-timer"><div class="game-timer__bar">60s</div></div>
+    <div class="game-board">
+      <div class="game-instruction">
+        <h3 class="game-instruction__header">Instruction</h3>
+        <p class="game-instruction__content">
+          - Click on the card to view the back face of the card. <br />
+          - Get two exact same card to score.<br />- Score are based on the time
+          and level. <br />- You only have 60s for each level. <br />- There are
+          three levels, '2x2', '4x4' and '6x6'. <br />- Press 'Start Game'
+          button when you are ready.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      </div>
+    </div>
+  </body>
     </div>
   );
 }
