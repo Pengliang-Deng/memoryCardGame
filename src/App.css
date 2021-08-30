@@ -1,0 +1,76 @@
+@font-face {
+  font-family: "neuropol";
+  src: url("./data/fonts/neuropol.woff") format("woff"), url("./data/fonts/neuropol.ttf") format("truetype");
+}
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+body {
+  font-family: "neuropol", sans-serif;
+  font-size: 1rem;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(#eaf9f8, #8cdcda);
+  color: #4d4d4d;
+}
+
+.game-title {
+  margin: 20px;
+}
+
+.game-stats {
+  width: 500px;
+  display: flex;
+}
+.game-stats__level, .game-stats__score {
+  display: flex;
+  justify-content: space-around;
+  flex: 1;
+}
+.game-stats__button {
+  font-family: inherit;
+  background-color: #8cdcda;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  line-height: 1rem;
+  cursor: pointer;
+  width: 100px;
+}
+
+.game-timer {
+  margin-top: 10px;
+  width: 550px;
+  background-color: #51cac7;
+  border-radius: 5px;
+}
+.game-timer__bar {
+  width: 100%;
+  height: 20px;
+  border-radius: 5px;
+  text-align: center;
+  line-height: 20px;
+  background-color: #8cdcda;
+  box-shadow: #8cdcda 0px 0 10px;
+}
+
+.game-instruction__header {
+  text-align: center;
+  margin: 10px;
+}
+
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,9 @@
+.game-board {
+    display: grid;
+    grid-gap: 20px;
+    padding: 20px;
+    perspective: 600px;
+    width: 600px;
+    height: 600px;
+  }
+  

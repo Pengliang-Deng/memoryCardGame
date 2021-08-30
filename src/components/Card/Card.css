@@ -1,0 +1,32 @@
+.card {
+    position: relative;
+    transition: transform 0.5s;
+    box-shadow: #f16a71dd 0px 0 10px;
+    border-radius: 5px;
+    transform: scale(1);
+    transform-style: preserve-3d;
+    cursor: pointer;
+  }
+  .card--flipped {
+    transform: rotateY(180deg);
+  }
+  .card__face {
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    background-origin: content-box;
+    background-repeat: no-repeat;
+    position: absolute;
+    backface-visibility: hidden;
+  }
+
+  .card__face--front {
+    background: #f16a70;
+    background-image: url("../../data/icons/m.png");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .card__face--back {
+    transform: rotateY(180deg);
+  }
