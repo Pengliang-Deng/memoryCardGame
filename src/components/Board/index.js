@@ -53,6 +53,10 @@ function Board(props) {
         }
     },[openCards])
 
+    useEffect(() => {
+        reset()
+    }, [props.shouldBoardReset])
+
     const reset = () => {
         setOpenCards([]);
         setMatchCards([]);

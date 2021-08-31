@@ -13,6 +13,7 @@ function App() {
   const [level, setLevel] = useState(initLevel);
   const [leftTime, setLeftTime] = useState(initTimer);
   const [cards, setCards] = useState([])
+  const [boardReset, setBoardReset] = useState(false);
   
   const [layout, setLayout] = useState(levelInfo[level - 1].layout);
 
@@ -28,6 +29,7 @@ function App() {
 
   const handleGameOver = () => {
     setIsStart(false);
+    setBoardReset((prev) => (!prev))
     alert(`Your Score is ${score}`);
   }
 
@@ -43,6 +45,22 @@ function App() {
     setLevel((prev) => (prev+1))
     setLeftTime(initTimer)
   }
+
+  // function swap(array, i, j) {
+  //   const temp = array[i];
+  //   array[i] = array[j];
+  //   array[j] = temp;
+  // }
+
+  // function shuffleCards(array) {
+  //   const length = array.length;
+  //   for (let i = length; i > 0; i--) {
+  //     const randomIndex = Math.floor(Math.random() * i);
+  //     const currentIndex = i - 1;
+  //     swap(array, currentIndex, randomIndex);
+  //   }
+  //   return array;
+  // }
 
   const initCards = () => {
     let cardsIndex = levelInfo[level-1].cards;
@@ -88,6 +106,7 @@ function App() {
         />
         <Board currentLevel={level} 
               cards={cards}
+              shouldBoardReset={boardReset}
               layout={layout} isStart={isStart} 
               handleGameComplete={handleGameComplete}
               handleScoreChange={calculateScore}
