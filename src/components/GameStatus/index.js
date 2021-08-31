@@ -16,20 +16,11 @@ function GameStatus(props) {
         },
     ]
 
-
     return (
         <div className="game-stats">
-            {/* <div className="game-stats__level">
-                <div className="game-stats__level--label">Current Level:</div>
-                <div className="game-stats__level--value">1</div>
-            </div>
-            <div className="game-stats__score">
-                <div className="game-stats__score--label">Score:</div>
-                <div className="game-stats__score--value">0</div>
-            </div> */}
-            {status.map((currentStatus)=>{
+            {status.map((currentStatus, index)=>{
                 return (
-                    <div className={currentStatus.name}>
+                    <div key={index} className={currentStatus.name}>
                         <div className={currentStatus.label.name}>{currentStatus.label.description}</div>
                         <div className={currentStatus.value.name}>{currentStatus.value.num}</div>
                     </div>

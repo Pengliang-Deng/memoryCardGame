@@ -2,32 +2,10 @@ import React, { useState, useEffect, useRef} from 'react';
 import Card from '../Card';
 import './Board.css';
 import '../Card';
-import {uniqueCardsArray} from '../../data'
 
 function Board(props) {
 
-    const Cards = [
-        {
-            id : 0,
-            type : uniqueCardsArray[0].type,
-            img: uniqueCardsArray[0].img
-        },
-        {
-            id : 1,
-            type : uniqueCardsArray[0].type,
-            img: uniqueCardsArray[0].img
-        },
-        {
-            id : 2,
-            type : uniqueCardsArray[1].type,
-            img: uniqueCardsArray[1].img
-        },
-        {
-            id : 3,
-            type : uniqueCardsArray[1].type,
-            img: uniqueCardsArray[1].img
-        },
-    ]
+    const Cards = props.cards
 
     const [openCards, setOpenCards] = useState([]);
     const [matchCards, setMatchCards] = useState([]);
@@ -54,27 +32,36 @@ function Board(props) {
         setOpenCards((prev) => ([...prev, id]))
     }
 
-    const handleScoreChange = props.handleScoreChange;
-
     useEffect(()=>{
         if(openCards.length > 1) {
-        if (Cards[openCards[0]].type === Cards[openCards[1]].type) {
-            setMatchCards((prev) => ([...prev, openCards[0], openCards[1]]))
-            handleScoreChange();
-            setOpenCards([]);
-        } else {
-            disable();
-            const timer = setTimeout(()=>{
-                    setOpenCards([])
-                }, 1500);
-                return () => {clearTimeout(timer); enable()}
+            if (Cards[openCards[0]].type === Cards[openCards[1]].type) {
+                setMatchCards((prev) => ([...prev, openCards[0], openCards[1]]))
+                props.handleScoreChange();
+                setOpenCards([]);
+                if (matchCards.length+2 === Cards.length) {
+                    props.handleGameComplete()
+                    reset()
+                }
+
+            } else {
+                disable();
+                const timer = setTimeout(()=>{
+                        setOpenCards([])
+                    }, 1500);
+                    return () => {clearTimeout(timer); enable()}
             } 
         }
     },[openCards])
 
+    const reset = () => {
+        setOpenCards([]);
+        setMatchCards([]);
+        setIsClickable(true);
+    }
+
     return (
         <div>
-            <div className={`game-board ${props.isStart? '':'hidden'}`} style={{"gridTemplateColumns" : "1fr 1fr"}}>
+            <div className={`game-board ${props.isStart? '':'hidden'}`} style={{"gridTemplateColumns" : `${props.layout}`}}>
                 
                 {Cards.map((card) => {return <Card 
                             img={card.img} 

@@ -3,20 +3,22 @@ import './Timer.css';
 
 function Timer(props) {
 
-    const [initTime, setInitTime] = useState(props.time);
-
     useEffect(()=>{
-        if (props.isStart & (initTime > 0)) {
-            setTimeout(()=>{
-                setInitTime((prev)=>(prev - 1))
+        if (props.isStart && (props.leftTime > 0)) {
+            const timer = setTimeout(()=>{
+                props.handleTimeChange()
             }, 1000)
+            return () => clearTimeout(timer)
+        } else if (props.leftTime === 0) {
+            props.handleGameOver();
         }
-    }, [initTime, props.isStart])
+        
+    }, [props.leftTime, props.isStart])
 
     return (
         <div className="game-timer">
-            <div className="game-timer__bar" style={{width:`${100*initTime/60}%`}}>
-                {`${initTime}s`}
+            <div className="game-timer__bar" style={{width:`${100*props.leftTime/60}%`}}>
+                {`${props.leftTime}s`}
             </div>
         </div>
     )

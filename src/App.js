@@ -3,31 +3,71 @@ import './App.css';
 import Board from './components/Board/';
 import Timer from './components/Timer/';
 import GameStatus from './components/GameStatus/';
-import {initGameData} from './data/';
+import {uniqueCardsArray, initGameData, levelInfo} from './data/';
 
 function App() {
 
   const {initScore, initLevel, initTimer} = initGameData[0];
   const [isStart, setIsStart] = useState(false);
-  const [gameOver, setGameOver] = useState(false);
   const [score, setScore] = useState(initScore);
   const [level, setLevel] = useState(initLevel);
+  const [leftTime, setLeftTime] = useState(initTimer);
+  const [cards, setCards] = useState([])
+  
+  const [layout, setLayout] = useState(levelInfo[level - 1].layout);
 
   const startGame = () => {
     if (!isStart) {
+      initStatus();
+      initCards();
       setIsStart(true);
     } else {
-      endGame()
+      handleGameOver()
     }
   }
 
-  const endGame = () => {
-    setGameOver(true)
+  const handleGameOver = () => {
+    setIsStart(false);
+    alert(`Your Score is ${score}`);
   }
 
-  const incrementScore = () =>{
-    setScore((prev)=>(prev + 1))
+  const calculateScore = () => {
+    setScore((prev) => (prev + (level**2)*leftTime))
   }
+
+  const handleTimeChange = () => {
+    setLeftTime((prev) => (prev -1))
+  }
+
+  const handleGameComplete = () => {
+    setLevel((prev) => (prev+1))
+    setLeftTime(initTimer)
+  }
+
+  const initCards = () => {
+    let cardsIndex = levelInfo[level-1].cards;
+    const deck = cardsIndex.map((cardIndex, index) => ({
+        id: index,
+        type: uniqueCardsArray[cardIndex].type,
+        img: uniqueCardsArray[cardIndex].img
+    }));
+    setCards(deck);
+  }
+
+  const initStatus = () => {
+    setLeftTime(initTimer);
+    setScore(initScore);
+    setLevel(initLevel);
+  }
+
+  useEffect(() => {
+    if (level > 3) {
+      handleGameOver();
+    } else {
+      setLayout(levelInfo[level - 1].layout);
+      initCards();
+    }
+  }, [level])
 
   return (
     <div className="App">
@@ -36,11 +76,22 @@ function App() {
 
         <div className="game-stats">
           <GameStatus score={score} level={level} />
-          <button onClick={() => startGame()} className="game-stats__button" type="button">New Game</button>
+          <button onClick={() => startGame()} className="game-stats__button" type="button">
+              {`${isStart? "End Game" : "Start Game"}`}
+          </button>
         </div>
 
-        <Timer isStart={isStart} time={initTimer} isGameOver={gameOver}/>
-        <Board isStart={isStart} handleScoreChange={incrementScore} isGameOver={gameOver}/>
+        <Timer isStart={isStart} 
+               handleTimeChange={handleTimeChange}
+               handleGameOver={handleGameOver}
+               leftTime={leftTime} 
+        />
+        <Board currentLevel={level} 
+              cards={cards}
+              layout={layout} isStart={isStart} 
+              handleGameComplete={handleGameComplete}
+              handleScoreChange={calculateScore}
+        />
 
     </div>
   );
