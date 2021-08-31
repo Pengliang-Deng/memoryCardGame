@@ -54,21 +54,24 @@ function App() {
 
   // function shuffleCards(array) {
   //   const length = array.length;
-  //   for (let i = length; i > 0; i--) {
-  //     const randomIndex = Math.floor(Math.random() * i);
-  //     const currentIndex = i - 1;
+  //   for (let i = length - 1; i > 0; i--) {
+  //     let randomIndex = Math.floor(Math.random() * (i+1));
+  //     let currentIndex = i;
   //     swap(array, currentIndex, randomIndex);
   //   }
   //   return array;
   // }
 
+  // for some reasons, after shuffling, some bugs occur
+
   const initCards = () => {
     let cardsIndex = levelInfo[level-1].cards;
-    const deck = cardsIndex.map((cardIndex, index) => ({
+    let deck = cardsIndex.map((cardIndex, index) => ({
         id: index,
         type: uniqueCardsArray[cardIndex].type,
         img: uniqueCardsArray[cardIndex].img
     }));
+    // deck = shuffleCards(deck)
     setCards(deck);
   }
 

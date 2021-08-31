@@ -11,7 +11,6 @@ function Board(props) {
     const [matchCards, setMatchCards] = useState([]);
     const [isClickable, setIsClickable] = useState(true);
 
-
     function checkIsFlipped(id) {
         return openCards.includes(id)
     }
