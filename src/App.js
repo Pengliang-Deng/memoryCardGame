@@ -2,13 +2,20 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import Board from './components/Board/';
 import Timer from './components/Timer/';
+import {initGameData} from './data/';
 
 function App() {
 
+  const {score, level, timer} = initGameData[0];
   const [isStart, setIsStart] = useState(false);
 
   const startGame = () => {
-    setIsStart(true);
+    if (!isStart) {
+      setIsStart(true);
+    } else {
+      // End Game and Show score
+      // setIsStart(false);
+    }
   }
 
   return (
@@ -28,7 +35,7 @@ function App() {
           <button onClick={() => startGame()} className="game-stats__button" type="button">New Game</button>
         </div>
 
-        <Timer isStart={isStart}/>
+        <Timer isStart={isStart} time={timer}/>
         <Board isStart={isStart}/>
 
     </div>
