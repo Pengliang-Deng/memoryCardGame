@@ -1,0 +1,10 @@
+
+.game-stats {
+    width: 500px;
+    display: flex;
+  }
+  .game-stats__level, .game-stats__score {
+    display: flex;
+    justify-content: space-around;
+    flex: 1;
+  }

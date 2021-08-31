@@ -61,9 +61,9 @@ export const uniqueCardsArray = [
 
 export const initGameData = [
     {
-        score: 0,
-        level: 1,
-        timer: 60
+        initScore: 0,
+        initLevel: 1,
+        initTimer: 60
     }
 ]
 

@@ -54,11 +54,14 @@ function Board(props) {
         setOpenCards((prev) => ([...prev, id]))
     }
 
+    const handleScoreChange = props.handleScoreChange;
+
     useEffect(()=>{
         if(openCards.length > 1) {
         if (Cards[openCards[0]].type === Cards[openCards[1]].type) {
             setMatchCards((prev) => ([...prev, openCards[0], openCards[1]]))
-            setOpenCards([])
+            handleScoreChange();
+            setOpenCards([]);
         } else {
             disable();
             const timer = setTimeout(()=>{

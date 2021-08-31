@@ -4,11 +4,9 @@ import './Timer.css';
 function Timer(props) {
 
     const [initTime, setInitTime] = useState(props.time);
-    // const [isStart, setIsStart] = useState(props.isStart);
 
     useEffect(()=>{
         if (props.isStart & (initTime > 0)) {
-            console.log('run timer')
             setTimeout(()=>{
                 setInitTime((prev)=>(prev - 1))
             }, 1000)
@@ -22,7 +20,6 @@ function Timer(props) {
             </div>
         </div>
     )
-    
 }
 
 export default Timer;
